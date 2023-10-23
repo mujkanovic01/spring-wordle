@@ -3,7 +3,7 @@ package com.example.springwordle.core.service;
 import com.example.springwordle.core.exceptions.repository.ResourceNotFoundException;
 import com.example.springwordle.core.model.User;
 import com.example.springwordle.core.repository.UserRepository;
-import com.example.springwordle.rest.dto.UserUpdateDTO;
+import com.example.springwordle.rest.dto.User.UserUpdateDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

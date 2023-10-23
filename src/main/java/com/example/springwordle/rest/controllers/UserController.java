@@ -2,8 +2,8 @@ package com.example.springwordle.rest.controllers;
 
 import com.example.springwordle.core.model.User;
 import com.example.springwordle.core.service.UserService;
-import com.example.springwordle.rest.dto.UserRegisterDTO;
-import com.example.springwordle.rest.dto.UserUpdateDTO;
+import com.example.springwordle.rest.dto.User.UserRegisterDTO;
+import com.example.springwordle.rest.dto.User.UserUpdateDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
