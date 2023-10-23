@@ -7,8 +7,6 @@ public class UserRegisterDTO {
     private String email;
     private String password;
 
-    public UserRegisterDTO() { }
-
     public UserRegisterDTO(User user) {
         this.username = user.getUsername();
         this.email = user.getEmail();
