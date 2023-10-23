@@ -3,6 +3,7 @@ package com.example.springwordle.rest.controllers;
 import com.example.springwordle.core.model.User;
 import com.example.springwordle.core.service.UserService;
 import com.example.springwordle.rest.dto.UserRegisterDTO;
+import com.example.springwordle.rest.dto.UserUpdateDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody UserRegisterDTO user) {
+    public ResponseEntity<User> updateUser(@PathVariable String id, @RequestBody UserUpdateDTO user) {
         return ResponseEntity.ok(userService.updateUser(id, user));
     }
 

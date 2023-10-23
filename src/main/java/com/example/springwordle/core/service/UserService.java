@@ -4,6 +4,7 @@ import com.example.springwordle.core.exceptions.repository.ResourceNotFoundExcep
 import com.example.springwordle.core.model.User;
 import com.example.springwordle.core.repository.UserRepository;
 import com.example.springwordle.rest.dto.UserRegisterDTO;
+import com.example.springwordle.rest.dto.UserUpdateDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -32,11 +33,11 @@ public class UserService {
         return user.orElseThrow(() -> new ResourceNotFoundException("The user with the given ID does not exist."));
     }
 
-    public User addUser(User payload) {
-        return userRepository.save(payload);
+    public User addUser(User user) {
+        return userRepository.save(user);
     }
 
-    public User updateUser(String id, UserRegisterDTO payload) {
+    public User updateUser(String id, UserUpdateDTO payload) {
         User user = this.getUserById(id);
         if (payload.getUsername() != null) {
             user.setUsername(payload.getUsername());
@@ -49,6 +50,10 @@ public class UserService {
         if (payload.getPassword() != null) {
             user.setPassword(payload.getPassword());
         }
+
+//        payload.getUsername().ifPresent(user::setUsername);
+//        payload.getEmail().ifPresent(user::setEmail);
+//        payload.getPassword().ifPresent(user::setPassword);
 
         return userRepository.save(user);
     }
