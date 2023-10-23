@@ -1,4 +1,4 @@
-package com.example.springwordle.rest.dto;
+package com.example.springwordle.rest.dto.User;
 
 import com.example.springwordle.core.model.User;
 

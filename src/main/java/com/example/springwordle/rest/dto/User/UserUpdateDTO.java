@@ -1,4 +1,4 @@
-package com.example.springwordle.rest.dto;
+package com.example.springwordle.rest.dto.User;
 
 public class UserUpdateDTO {
     private String username;
