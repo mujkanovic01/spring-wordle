@@ -5,14 +5,14 @@ import com.example.springwordle.core.model.Word;
 
 import java.util.Date;
 
-public class GameCreateDTO {
+public class GameCreateDailyDTO {
     private Word word;
     private Date gameDate;
     private Boolean isDaily;
 
-    public GameCreateDTO() { }
+    public GameCreateDailyDTO() { }
 
-    public GameCreateDTO(Game game) {
+    public GameCreateDailyDTO(Game game) {
         this.setWord(game.getWord());
         this.setGameDate(game.getGameDate());
         this.setIsDaily(game.getIsDaily());

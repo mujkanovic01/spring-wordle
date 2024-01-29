@@ -39,15 +39,23 @@ public class UserGameService {
         return userGame.orElseThrow(() -> new ResourceNotFoundException("The User-Game with the given ID does not exist."));
     }
 
-    public UserGame addUserGame(UserGame userGame) {
-        new print(userGame, userGame.getGameId());
-        if(userGame.getGameId() == null) {
-            Word word = this.wordService.getRandomWord();
-            Game newGame = this.gameService.createGame(word, new Date());
+    public UserGame getUserGameByUserIdAndGameId(String userId, String gameId) {
+        Optional<UserGame> userGame = userGameRepository.findByUserIdAndGameId(userId, gameId);
+        return userGame.orElse(null);
+    }
 
-            new print(word, newGame, newGame.getId());
-            userGame.setGameId(newGame.getId());
-        }
+    public UserGame startGame(UserGame userGame) {
+        Word word = this.wordService.getRandomWord();
+        Game newGame = this.gameService.createGame(word, new Date(), false);
+        userGame.setGameId(newGame.getId());
+
+        return userGameRepository.save(userGame);
+    }
+
+    public UserGame startDailyGame(UserGame userGame) {
+        UserGame existingUserGame = this.getUserGameByUserIdAndGameId(userGame.getUserId(), userGame.getGameId());
+        if(existingUserGame != null) throw new GeneralException("You cannot play the same game more than once.");
+
         return userGameRepository.save(userGame);
     }
 

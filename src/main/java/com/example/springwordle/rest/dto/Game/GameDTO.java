@@ -5,29 +5,37 @@ import com.example.springwordle.core.model.Word;
 
 import java.util.Date;
 
-public class GameCreateDTO {
-    private Word word;
+public class GameDTO {
+    private String id;
     private Date gameDate;
     private Boolean isDaily;
 
-    public GameCreateDTO() { }
+    public GameDTO() { }
 
-    public GameCreateDTO(Game game) {
-        this.setWord(game.getWord());
+    public GameDTO(String id, Date gameDate, Boolean isDaily) {
+        this.setId(id);
+        this.setGameDate(gameDate);
+        this.setIsDaily(isDaily);
+    }
+
+    public GameDTO(Game game) {
+        this.setId(game.getId());
         this.setGameDate(game.getGameDate());
         this.setIsDaily(game.getIsDaily());
     }
 
-    public Game toGame() {
-        return new Game(word, gameDate, isDaily);
+    public GameDTO(GameDTO game) {
+        this.setId(game.getId());
+        this.setGameDate(game.getGameDate());
+        this.setIsDaily(game.getIsDaily());
     }
 
-    public Word getWord() {
-        return word;
+    public String getId() {
+        return id;
     }
 
-    public void setWord(Word word) {
-        this.word = word;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public Date getGameDate() {

@@ -11,18 +11,20 @@ public class Game {
     private String id;
     private Word word;
     private Date gameDate;
+    private Boolean isDaily;
 
-    public Game(Word word, Date gameDate) {
+    public Game(Word word, Date gameDate, Boolean isDaily) {
         this.setWord(word);
         this.setGameDate(gameDate);
+        this.setIsDaily(isDaily);
     }
 
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public Word getWord() {
-        return word;
+        return this.word;
     }
 
     public void setWord(Word word) {
@@ -30,10 +32,18 @@ public class Game {
     }
 
     public Date getGameDate() {
-        return gameDate;
+        return this.gameDate;
     }
 
     public void setGameDate(Date gameDate) {
         this.gameDate = gameDate;
+    }
+
+    public Boolean getIsDaily() {
+        return this.isDaily;
+    }
+
+    public void setIsDaily(Boolean isDaily) {
+        this.isDaily = isDaily;
     }
 }

@@ -15,6 +15,13 @@ public class UserGame {
     private String userId; // FK to User
     private String gameId; // FK to Game
 
+    public UserGame(String userId) {
+        this.setHasWon(false);
+        this.setUserId(userId);
+        this.setGameId(null);
+        this.setGuesses(new ArrayList<>());
+    }
+
     public UserGame(String userId, String gameId) {
         this.setHasWon(false);
         this.setUserId(userId);

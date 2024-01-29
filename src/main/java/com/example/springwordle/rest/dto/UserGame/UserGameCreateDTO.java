@@ -9,17 +9,15 @@ import java.util.Date;
 
 public class UserGameCreateDTO {
     private String userId; // FK to User
-    private String gameId; // FK to Game
 
     public UserGameCreateDTO() {}
 
     public UserGameCreateDTO(UserGame game) {
         this.setUserId(game.getUserId());
-        this.setGameId(game.getGameId());
     }
 
     public UserGame toUserGame() {
-        return new UserGame(userId, gameId);
+        return new UserGame(userId);
     }
 
     public String getUserId() {
@@ -28,13 +26,5 @@ public class UserGameCreateDTO {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(String gameId) {
-        this.gameId = gameId;
     }
 }

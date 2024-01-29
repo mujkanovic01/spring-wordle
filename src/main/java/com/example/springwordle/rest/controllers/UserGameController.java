@@ -2,10 +2,7 @@ package com.example.springwordle.rest.controllers;
 
 import com.example.springwordle.core.model.UserGame;
 import com.example.springwordle.core.service.UserGameService;
-import com.example.springwordle.rest.dto.UserGame.UserGameCreateDTO;
-import com.example.springwordle.rest.dto.UserGame.UserGameGuessResponseDTO;
-import com.example.springwordle.rest.dto.UserGame.UserGameMakeAGuessDTO;
-import com.example.springwordle.rest.dto.UserGame.UserGameUpdateDTO;
+import com.example.springwordle.rest.dto.UserGame.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,9 +23,14 @@ public class UserGameController {
         return ResponseEntity.ok(userGameService.getUserGames());
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/create")
-    public ResponseEntity<UserGame> addUserGame(@RequestBody UserGameCreateDTO userGame) {
-        return ResponseEntity.ok(userGameService.addUserGame(userGame.toUserGame()));
+    @RequestMapping(method = RequestMethod.POST, path = "/startGame")
+    public ResponseEntity<UserGame> startGame(@RequestBody UserGameCreateDTO userGame) {
+        return ResponseEntity.ok(userGameService.startGame(userGame.toUserGame()));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/startDailyGame")
+    public ResponseEntity<UserGame> startDailyGame(@RequestBody UserGameCreateDailyDTO userGame) {
+        return ResponseEntity.ok(userGameService.startDailyGame(userGame.toUserGame()));
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
