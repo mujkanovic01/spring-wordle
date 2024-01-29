@@ -26,7 +26,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST, path = "/register")
     public ResponseEntity<User> register(@RequestBody UserRegisterDTO user) {
-        return ResponseEntity.ok(userService.addUser(user.toUser()));
+        return ResponseEntity.ok(userService.addUser(user.toEntity()));
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")

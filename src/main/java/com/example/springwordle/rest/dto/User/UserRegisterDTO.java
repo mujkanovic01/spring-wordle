@@ -4,31 +4,22 @@ import com.example.springwordle.core.model.User;
 
 public class UserRegisterDTO {
     private String username;
-    private String email;
     private String password;
+    private String confirmPassword;
 
     public UserRegisterDTO() { }
 
     public UserRegisterDTO(User user) {
         this.username = user.getUsername();
-        this.email = user.getEmail();
         this.password = user.getPassword();
     }
 
-    public User toUser() {
-        return new User(email, username, password);
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+    public User toEntity() {
+        return new User(username, password);
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public void setUsername(String username) {
@@ -36,10 +27,20 @@ public class UserRegisterDTO {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getConfirmPassword() {
+        return this.confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+
 }

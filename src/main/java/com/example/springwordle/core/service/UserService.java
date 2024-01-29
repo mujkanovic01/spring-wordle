@@ -4,6 +4,9 @@ import com.example.springwordle.core.exceptions.repository.ResourceNotFoundExcep
 import com.example.springwordle.core.model.User;
 import com.example.springwordle.core.repository.UserRepository;
 import com.example.springwordle.rest.dto.User.UserUpdateDTO;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -39,10 +42,6 @@ public class UserService {
             user.setUsername(payload.getUsername());
         }
 
-        if (payload.getEmail() != null) {
-            user.setEmail(payload.getEmail());
-        }
-
         if (payload.getPassword() != null) {
             user.setPassword(payload.getPassword());
         }
@@ -55,4 +54,8 @@ public class UserService {
         userRepository.delete(user);
     }
 
+    public UserDetailsService userDetailsService() {
+        return username -> userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+    }
 }

@@ -1,12 +1,10 @@
 package com.example.springwordle.rest.dto.User;
 
-public class UserUpdateDTO {
+public class LoginRequestDTO {
     private String username;
     private String password;
 
-    public UserUpdateDTO() { }
-
-    public UserUpdateDTO(String username, String password) {
+    public LoginRequestDTO(String username, String password) {
         this.username = username;
         this.password = password;
     }

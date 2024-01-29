@@ -1,6 +1,7 @@
 package com.example.springwordle.core.service;
 
 import com.example.springwordle.core.exceptions.GeneralException;
+import com.example.springwordle.core.exceptions.game.GameAlreadyFinished;
 import com.example.springwordle.core.exceptions.game.InvalidWordException;
 import com.example.springwordle.core.exceptions.game.TooManyGuessesException;
 import com.example.springwordle.core.exceptions.repository.ResourceNotFoundException;
@@ -53,9 +54,13 @@ public class UserGameService {
     public UserGameGuessResponseDTO makeAGuess(String id, UserGameMakeAGuessDTO payload) {
         UserGame userGame = this.getUserGameById(id);
         String userGuess = payload.getGuess();
-        new print(userGuess, userGame.getNumOfGuesses());
+
         Game game = this.gameService.getGameById(userGame.getGameId());
         String wordToGuess = game.getWord().getWord();
+
+        if(userGame.getHasWon()) {
+            throw new GameAlreadyFinished("You have already finished this game.");
+        }
 
         if(userGame.getNumOfGuesses() >= 6) {
             throw new TooManyGuessesException("You have already made 6 guesses.");
