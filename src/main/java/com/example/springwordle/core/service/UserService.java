@@ -32,6 +32,11 @@ public class UserService {
         return user.orElseThrow(() -> new ResourceNotFoundException("The user with the given ID does not exist."));
     }
 
+    public User getUserByUsername(String username) {
+        Optional<User> user = userRepository.findByUsername(username);
+        return user.orElseThrow(() -> new ResourceNotFoundException("The user with the given username does not exist."));
+    }
+
     public User addUser(User user) {
         return userRepository.save(user);
     }

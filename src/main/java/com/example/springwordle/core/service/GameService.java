@@ -33,7 +33,7 @@ public class GameService {
         return game.orElseThrow(() -> new ResourceNotFoundException("The game with the given ID does not exist."));
     }
 
-    public GameDTO getTodayDailyGame() {
+    public GameDTO getDailyGame() {
         Date currentDate = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         String datePart = sdf.format(currentDate);

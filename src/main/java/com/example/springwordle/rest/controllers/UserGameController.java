@@ -3,6 +3,7 @@ package com.example.springwordle.rest.controllers;
 import com.example.springwordle.core.model.UserGame;
 import com.example.springwordle.core.service.UserGameService;
 import com.example.springwordle.rest.dto.UserGame.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/userGames")
+@SecurityRequirement(name = "JWT Security")
 public class UserGameController {
     private final UserGameService userGameService;
 
@@ -24,13 +26,13 @@ public class UserGameController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/startGame")
-    public ResponseEntity<UserGame> startGame(@RequestBody UserGameCreateDTO userGame) {
-        return ResponseEntity.ok(userGameService.startGame(userGame.toUserGame()));
+    public ResponseEntity<UserGame> startGame() {
+        return ResponseEntity.ok(userGameService.startGame(new UserGame()));
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/startDailyGame")
-    public ResponseEntity<UserGame> startDailyGame(@RequestBody UserGameCreateDailyDTO userGame) {
-        return ResponseEntity.ok(userGameService.startDailyGame(userGame.toUserGame()));
+    public ResponseEntity<UserGame> startDailyGame() {
+        return ResponseEntity.ok(userGameService.startDailyGame(new UserGame()));
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")

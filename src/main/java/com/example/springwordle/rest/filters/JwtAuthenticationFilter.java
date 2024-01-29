@@ -1,6 +1,7 @@
 package com.example.springwordle.rest.filters;
 
 import com.example.springwordle.core.exceptions.repository.ResourceNotFoundException;
+import com.example.springwordle.core.helpers.print;
 import com.example.springwordle.core.service.JwtService;
 import com.example.springwordle.core.service.UserService;
 import com.mongodb.lang.NonNull;
@@ -37,12 +38,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
+
+        new print(authHeader);
         if (StringUtils.isEmpty(authHeader) || !StringUtils.startsWith(authHeader, "Bearer ")) {
             filterChain.doFilter(request, response);
             return;
         }
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUserName(jwt);
+        new print(userEmail);
         if (StringUtils.isNotEmpty(userEmail)
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
             UserDetails userDetails = userService.userDetailsService()

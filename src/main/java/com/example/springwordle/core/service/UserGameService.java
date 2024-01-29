@@ -7,12 +7,16 @@ import com.example.springwordle.core.exceptions.game.TooManyGuessesException;
 import com.example.springwordle.core.exceptions.repository.ResourceNotFoundException;
 import com.example.springwordle.core.helpers.print;
 import com.example.springwordle.core.model.Game;
+import com.example.springwordle.core.model.User;
 import com.example.springwordle.core.model.UserGame;
 import com.example.springwordle.core.model.Word;
 import com.example.springwordle.core.repository.UserGameRepository;
+import com.example.springwordle.rest.dto.Game.GameDTO;
 import com.example.springwordle.rest.dto.UserGame.UserGameGuessResponseDTO;
 import com.example.springwordle.rest.dto.UserGame.UserGameMakeAGuessDTO;
 import com.example.springwordle.rest.dto.UserGame.UserGameUpdateDTO;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -22,11 +26,13 @@ public class UserGameService {
     private final UserGameRepository userGameRepository;
     private final GameService gameService;
     private final WordService wordService;
+    private final UserService userService;
 
-    public UserGameService(UserGameRepository userGameRepository, GameService gameService, WordService wordService) {
+    public UserGameService(UserGameRepository userGameRepository, GameService gameService, WordService wordService, UserService userService) {
         this.userGameRepository = userGameRepository;
         this.gameService = gameService;
         this.wordService = wordService;
+        this.userService = userService;
     }
 
     public List<UserGame> getUserGames() {
@@ -41,10 +47,15 @@ public class UserGameService {
 
     public UserGame getUserGameByUserIdAndGameId(String userId, String gameId) {
         Optional<UserGame> userGame = userGameRepository.findByUserIdAndGameId(userId, gameId);
+        new print(userGame);
         return userGame.orElse(null);
     }
 
     public UserGame startGame(UserGame userGame) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = this.userService.getUserByUsername(authentication.getName());
+        userGame.setUserId(user.getId());
+
         Word word = this.wordService.getRandomWord();
         Game newGame = this.gameService.createGame(word, new Date(), false);
         userGame.setGameId(newGame.getId());
@@ -53,7 +64,14 @@ public class UserGameService {
     }
 
     public UserGame startDailyGame(UserGame userGame) {
-        UserGame existingUserGame = this.getUserGameByUserIdAndGameId(userGame.getUserId(), userGame.getGameId());
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = this.userService.getUserByUsername(authentication.getName());
+        userGame.setUserId(user.getId());
+
+        GameDTO dailyGame = this.gameService.getDailyGame();
+        userGame.setGameId(dailyGame.getId());
+
+        UserGame existingUserGame = this.getUserGameByUserIdAndGameId(user.getId(), userGame.getGameId());
         if(existingUserGame != null) throw new GeneralException("You cannot play the same game more than once.");
 
         return userGameRepository.save(userGame);

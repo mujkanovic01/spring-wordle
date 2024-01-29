@@ -4,6 +4,7 @@ import com.example.springwordle.core.model.User;
 import com.example.springwordle.core.service.UserService;
 import com.example.springwordle.rest.dto.User.UserRegisterDTO;
 import com.example.springwordle.rest.dto.User.UserUpdateDTO;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/users")
+@SecurityRequirement(name = "JWT Security")
 public class UserController {
     private final UserService userService;
 
