@@ -3,6 +3,8 @@ package com.example.springwordle.rest.controllers;
 import com.example.springwordle.core.model.UserGame;
 import com.example.springwordle.core.service.UserGameService;
 import com.example.springwordle.rest.dto.UserGame.UserGameCreateDTO;
+import com.example.springwordle.rest.dto.UserGame.UserGameGuessResponseDTO;
+import com.example.springwordle.rest.dto.UserGame.UserGameMakeAGuessDTO;
 import com.example.springwordle.rest.dto.UserGame.UserGameUpdateDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,13 +27,18 @@ public class UserGameController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/create")
-    public ResponseEntity<UserGame> register(@RequestBody UserGameCreateDTO userGame) {
+    public ResponseEntity<UserGame> addUserGame(@RequestBody UserGameCreateDTO userGame) {
         return ResponseEntity.ok(userGameService.addUserGame(userGame.toUserGame()));
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{id}")
     public ResponseEntity<UserGame> getUserGameById(@PathVariable String id) {
         return ResponseEntity.ok(userGameService.getUserGameById(id));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, path = "/makeAGuess/{id}")
+    public ResponseEntity<UserGameGuessResponseDTO> makeAGuess(@PathVariable String id, @RequestBody UserGameMakeAGuessDTO userGame) {
+        return ResponseEntity.ok(userGameService.makeAGuess(id, userGame));
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{id}")

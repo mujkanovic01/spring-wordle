@@ -9,10 +9,10 @@ import java.util.Date;
 public class Game {
     @Id
     private String id;
-    private String word;
+    private Word word;
     private Date gameDate;
 
-    public Game(String word, Date gameDate) {
+    public Game(Word word, Date gameDate) {
         this.setWord(word);
         this.setGameDate(gameDate);
     }
@@ -21,11 +21,11 @@ public class Game {
         return id;
     }
 
-    public String getWord() {
+    public Word getWord() {
         return word;
     }
 
-    public void setWord(String word) {
+    public void setWord(Word word) {
         this.word = word;
     }
 

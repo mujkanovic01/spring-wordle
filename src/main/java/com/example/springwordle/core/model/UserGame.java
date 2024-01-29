@@ -3,20 +3,23 @@ package com.example.springwordle.core.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Document
 public class UserGame {
     @Id
     private String id;
-    private Integer numOfGuesses;
     private Boolean hasWon;
+    private List<String> guesses;
     private String userId; // FK to User
     private String gameId; // FK to Game
 
-    public UserGame(Integer numOfGuesses, Boolean hasWon, String userId, String gameId) {
-        this.setNumOfGuesses(numOfGuesses);
-        this.setHasWon(hasWon);
+    public UserGame(String userId, String gameId) {
+        this.setHasWon(false);
         this.setUserId(userId);
         this.setGameId(gameId);
+        this.setGuesses(new ArrayList<>());
     }
 
     public String getId() {
@@ -24,11 +27,19 @@ public class UserGame {
     }
 
     public Integer getNumOfGuesses() {
-        return numOfGuesses;
+        return this.getGuesses().size();
     }
 
-    public void setNumOfGuesses(Integer numOfGuesses) {
-        this.numOfGuesses = numOfGuesses;
+    public List<String> getGuesses() {
+        return guesses;
+    }
+
+    public void addAGuess(String guess) {
+        this.guesses.add(guess);
+    }
+
+    public void setGuesses(List<String> guesses) {
+        this.guesses = guesses;
     }
 
     public Boolean getHasWon() {

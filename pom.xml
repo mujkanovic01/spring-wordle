@@ -12,6 +12,17 @@
     <artifactId>spring-wordle</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>spring-wordle</name>
+    core
+     exceptions
+     model
+     repository
+     service
+    rest
+     controllers
+     dto
+      game
+      user
+      usergame
     <description>spring-wordle</description>
     <properties>
         <java.version>17</java.version>

@@ -1,11 +1,12 @@
 package com.example.springwordle.rest.dto.Game;
 
 import com.example.springwordle.core.model.Game;
+import com.example.springwordle.core.model.Word;
 
 import java.util.Date;
 
 public class GameCreateDTO {
-    private String word;
+    private Word word;
     private Date gameDate;
 
     public GameCreateDTO() { }
@@ -19,11 +20,11 @@ public class GameCreateDTO {
         return new Game(word, gameDate);
     }
 
-    public String getWord() {
+    public Word getWord() {
         return word;
     }
 
-    public void setWord(String word) {
+    public void setWord(Word word) {
         this.word = word;
     }
 

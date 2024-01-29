@@ -34,10 +34,10 @@ public class GameController {
         return ResponseEntity.ok(gameService.getGameById(id));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
-    public ResponseEntity<Game> updateGame(@PathVariable String id, @RequestBody GameUpdateDTO game) {
-        return ResponseEntity.ok(gameService.updateGame(id, game));
-    }
+//    @RequestMapping(method = RequestMethod.PUT, path = "/{id}")
+//    public ResponseEntity<Game> updateGame(@PathVariable String id, @RequestBody GameUpdateDTO game) {
+//        return ResponseEntity.ok(gameService.updateGame(id, game));
+//    }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{id}")
     public ResponseEntity<Void> deleteGame(@PathVariable String id) {
