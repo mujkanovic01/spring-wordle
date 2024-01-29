@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/userGames")
 @SecurityRequirement(name = "JWT Security")
+@CrossOrigin(origins = "http://localhost:5173")
 public class UserGameController {
     private final UserGameService userGameService;
 

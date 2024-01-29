@@ -79,7 +79,7 @@ public class UserGameService {
 
     public UserGameGuessResponseDTO makeAGuess(String id, UserGameMakeAGuessDTO payload) {
         UserGame userGame = this.getUserGameById(id);
-        String userGuess = payload.getGuess();
+        String userGuess = payload.getGuess().toLowerCase();
 
         Game game = this.gameService.getGameById(userGame.getGameId());
         String wordToGuess = game.getWord().getWord();
