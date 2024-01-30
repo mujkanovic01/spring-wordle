@@ -13,6 +13,8 @@ application.yml
 .settings
 .springBeans
 .sts4-cache
+frontend/
+node_modules/
 
 ### IntelliJ IDEA ###
 .idea
